@@ -17,6 +17,10 @@ add_action("admin_menu", "pluginajax_menu");
 
 function employeeList(){
     include "employeeList.php";
+
+
+
+
 }
 
 /* Include CSS and Script */
@@ -48,6 +52,9 @@ function employeeList_callback() {
 
     echo json_encode($response);
     wp_die();
+
+
+
 }
 
 ## Search record
@@ -72,3 +79,5 @@ function searchEmployeeList_callback() {
     echo json_encode($response);
     wp_die();
 }
+
+

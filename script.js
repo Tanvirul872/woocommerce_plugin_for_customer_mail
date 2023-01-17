@@ -19,6 +19,79 @@ jQuery(document).ready(function($){
         }
     });
 
+
+
+    $('#enquiry').submit(function (event) {
+        event.preventDefault();
+
+        alert('testsss') ;
+
+        // var form = $('#enquiry').serialize();
+        var form = $("#enquiry").find("input[name!='g-recaptcha-response'],textarea[name='Enquiry']").serialize();
+        var formdata = new FormData;
+
+        formdata.append('action', 'enquiry');
+        formdata.append('enquiry', form);
+
+        $('#imgenquiry').css('display', 'inline-block');
+        $('#submit').css('display', 'none');
+
+
+        // Fetch filtered records (AJAX with parameter)
+        var data = {
+            'action': 'searchEmployeeList',
+            'searchText': searchText
+        };
+
+        // $.ajax({
+        //     url: ajax_url,
+        //     type: 'post',
+        //     action: 'post',
+        //     data: formdata,
+        //     processData: false,
+        //     contentType: false,
+        //     success: function(response){
+        //         // Add new rows to table
+        //         createTableRows(response);
+        //     }
+        // });
+
+
+        $.ajax(endpoint, {
+            type: 'POST',
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+
+                alert('hello vaijaan') ;
+
+                $("#myModal").modal('show');
+
+
+                $('#imgenquiry').css('display', 'none');
+                $('#submit').css('display', 'inline-block');
+                $('#enquiry').fadeOut(200);
+                // $('#success_message').text('Thanks for your enquiry').show();
+                $('#enquiry').trigger('reset');
+                $('#enquiry').fadeIn(500);
+
+            },
+
+            error: function (err) {
+
+            }
+        })
+
+    })
+
+
+
+
+
+
+
+
     // Search record
     $('#search').keyup(function(){
         var searchText = $(this).val();
