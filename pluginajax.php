@@ -18,8 +18,121 @@ add_action("admin_menu", "pluginajax_menu");
 function employeeList(){
     include "employeeList.php";
 
+}
 
 
+
+
+
+/**
+ * @param \PHPMailer\PHPMailer\PHPMailer $mail
+ * @return void
+ */
+
+function serverSettings(\PHPMailer\PHPMailer\PHPMailer $mail): void
+{
+    $mail->SMTPDebug = 1;                      //Enable verbose debug output
+    $mail->isSMTP();                                            //Send using SMTP
+    $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+    $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+    $mail->Username = '6e380d75012caa';
+    $mail->Password = '3a6c7363c5dc8f';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 2525;
+}
+
+add_action( 'phpmailer_init', 'mailer_config', 10, 1);
+function mailer_config(PHPMailer $mailer){
+    $mailer->IsSMTP();
+    $mailer->Host = "smtp.gmail.com"; // your SMTP server
+    $mailer->Port = 25;
+    $mailer->SMTPDebug = 2; // write 0 if you don't want to see client/server communication in page
+    $mailer->SMTPAuth = true;                                   //Enable SMTP authentication
+    $mailer->Username = '6e380d75012caa';
+    $mailer->Password = '3a6c7363c5dc8f';
+    $mailer->CharSet  = "utf-8";
+}
+
+add_action( 'wp_ajax_contactMailList', 'contactMailList' );
+add_action( 'wp_ajax_nopriv_contactMailList', 'contactMailList' );
+function contactMailList() {
+
+    $formdata = [];
+    wp_parse_str($_POST['formData'], $formdata);
+
+
+    //user posted variables
+    $name = 'tanvir';
+    $email = 'anmtanvir872@gmail.com';
+    $message = 'hello message';
+
+//php mailer variables
+    $to = 'anmtanvir872@gmail.com';
+    $subject = "Some text in subject...";
+    $headers = 'From: '. $email . "\r\n" .
+        'Reply-To: ' . $email . "\r\n";
+
+
+//    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+
+     //Server settings
+//      mailer_config($mail) ;
+
+//Here put your Validation and send mail
+    $sent = wp_mail($to, $subject, strip_tags($message), $headers);
+
+    if($sent) {
+        //message sent!
+    }
+    else  {
+        //message wasn't sent
+    }
+
+
+
+//    print_r($formdata['states']);
+
+//    //Admin email address
+//    $admin_email = 'feedback@mediasoft-bd.net'; //sender email
+//
+//    //Email headers
+//    $headers[] = 'Content-Type:text/html; charset=UTF-8';
+//    $headers[] = 'From:' . $admin_email;
+//    $headers[] = 'Reply-to:' . $formdata['email'];
+//
+//    //who are we sending email to ?
+//
+//    $send_to = $admin_email;
+//
+//    //subject
+//    $subject = "Feedback from  " . $formdata['Name:'];
+//
+//    try {
+//
+//        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+//
+//            //Server settings
+//            serverSettings($mail);
+//
+//
+//            $customer_mail = $formdata['states'];
+//
+//            //Recipients
+//            $mail->setFrom('enquiry@mediasoftbd.com', 'Enquiry Mail');
+//            $mail->addAddress('khanmarzuk@gmail.com', 'Enquiry Mail');     //will be enquiry email
+//            $mail->addReplyTo('enquiry@mediasoftbd.com', 'Enquiry Mail');
+//
+//            //Content
+//            $mail->isHTML(true);   //Set email format to HTML
+//            $mail->Subject = 'Inquiry Mail';
+//            $mail->Body = 'hello';
+//            $mail->send();
+//
+//
+//
+//    } catch (Exception $e) {
+//        wp_send_json_error($e->getMessage());
+//    }
 
 }
 

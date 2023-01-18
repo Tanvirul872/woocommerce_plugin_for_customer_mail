@@ -21,73 +21,77 @@ jQuery(document).ready(function($){
 
 
 
+
+
+
     $('#enquiry').submit(function (event) {
         event.preventDefault();
 
-        alert('testsss') ;
 
-        // var form = $('#enquiry').serialize();
-        var form = $("#enquiry").find("input[name!='g-recaptcha-response'],textarea[name='Enquiry']").serialize();
-        var formdata = new FormData;
+        alert('hello') ;
 
-        formdata.append('action', 'enquiry');
-        formdata.append('enquiry', form);
+        var ajax_url = plugin_ajax_object.ajax_url;
 
-        $('#imgenquiry').css('display', 'inline-block');
-        $('#submit').css('display', 'none');
+        var form = $('#enquiry').serialize();
+        // var form = $("#enquiry").find("input[name!='g-recaptcha-response'],textarea[name='Enquiry']").serialize();
 
 
-        // Fetch filtered records (AJAX with parameter)
+        console.log(form) ;
+        // var formdata = new FormData;
+
+
+        //
+        // formdata.append('action', 'enquiry');
+        // formdata.append('enquiry', form);
+        //
+        // $('#imgenquiry').css('display', 'inline-block');
+        // $('#submit').css('display', 'none');
+
         var data = {
-            'action': 'searchEmployeeList',
-            'searchText': searchText
+            'action': 'contactMailList',
+            'formData': form
+
         };
 
-        // $.ajax({
+        $.ajax({
+            url: ajax_url,
+            type: 'post',
+            data: data,
+            dataType: 'json',
+            success: function(response){
+                // Add new rows to table
+                alert('success') ;
+            }
+        });
+
+
+        // $.ajax(endpoint, {
+        //     type: 'POST',
         //     url: ajax_url,
-        //     type: 'post',
-        //     action: 'post',
         //     data: formdata,
         //     processData: false,
         //     contentType: false,
-        //     success: function(response){
-        //         // Add new rows to table
-        //         createTableRows(response);
+        //     success: function (res) {
+        //
+        //
+        //         $("#myModal").modal('show');
+        //
+        //
+        //         $('#imgenquiry').css('display', 'none');
+        //         $('#submit').css('display', 'inline-block');
+        //         $('#enquiry').fadeOut(200);
+        //         // $('#success_message').text('Thanks for your enquiry').show();
+        //         $('#enquiry').trigger('reset');
+        //         $('#enquiry').fadeIn(500);
+        //
+        //     },
+        //
+        //     error: function (err) {
+        //
         //     }
-        // });
-
-
-        $.ajax(endpoint, {
-            type: 'POST',
-            data: formdata,
-            processData: false,
-            contentType: false,
-            success: function (res) {
-
-                alert('hello vaijaan') ;
-
-                $("#myModal").modal('show');
-
-
-                $('#imgenquiry').css('display', 'none');
-                $('#submit').css('display', 'inline-block');
-                $('#enquiry').fadeOut(200);
-                // $('#success_message').text('Thanks for your enquiry').show();
-                $('#enquiry').trigger('reset');
-                $('#enquiry').fadeIn(500);
-
-            },
-
-            error: function (err) {
-
-            }
-        })
+        // })
 
     })
-
-
-
-
 
 
 
