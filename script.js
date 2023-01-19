@@ -64,37 +64,12 @@ jQuery(document).ready(function($){
             }
         });
 
-
-        // $.ajax(endpoint, {
-        //     type: 'POST',
-        //     url: ajax_url,
-        //     data: formdata,
-        //     processData: false,
-        //     contentType: false,
-        //     success: function (res) {
-        //
-        //
-        //         $("#myModal").modal('show');
-        //
-        //
-        //         $('#imgenquiry').css('display', 'none');
-        //         $('#submit').css('display', 'inline-block');
-        //         $('#enquiry').fadeOut(200);
-        //         // $('#success_message').text('Thanks for your enquiry').show();
-        //         $('#enquiry').trigger('reset');
-        //         $('#enquiry').fadeIn(500);
-        //
-        //     },
-        //
-        //     error: function (err) {
-        //
-        //     }
-        // })
-
     })
 
 
-
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
 
     // Search record
     $('#search').keyup(function(){

@@ -79,7 +79,7 @@ foreach ( bbloomer_customer_list() as $customer_id ) {
     <div class="form-group col-md-9">
       <label for="inputState"> Customer Email </label>
     
-      <select class="form-control" name="emails[]" id="enquiry" multiple="multiple">
+      <select  class="js-example-basic-multiple" name="emails[]" id="enquiry" multiple="multiple">
             <?php foreach($billing_email as $billing_emails){ ?>
                 <option value="<?php echo $billing_emails ; ?>"><?php echo $billing_emails ; ?></option>
             <?php  }  ?>
