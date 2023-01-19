@@ -55,46 +55,49 @@ foreach ( bbloomer_customer_list() as $customer_id ) {
 
     <form action="http://localhost/decantworld/wp-admin/admin.php?page/edit" id="enquiry">
 
-        <label for="c_mail"> Customer Email :</label>
-        <select class="form-control" name="states[]" id="enquiry" multiple="multiple">
+
+   
+ <div class="form-row">
+    <div class="form-group col-md-9">
+      <label for="inputtitle">Title</label>
+      <input type="text" id="inputtitle" class="form-control"  name="temp_title" placeholder="Title">
+    </div>
+
+
+    <div class="form-group col-md-9">
+      <label for="inputdesc">Description</label>
+      <?php
+            $content   = '';
+            $settings = array( 'textarea_name' => 'temp_desc' ); 
+            wp_editor( $content, 4 , $settings );
+        ?>
+  </div>
+
+
+  <div class="form-row">
+
+    <div class="form-group col-md-9">
+      <label for="inputState"> Customer Email </label>
+    
+      <select class="form-control" name="emails[]" id="enquiry" multiple="multiple">
             <?php foreach($billing_email as $billing_emails){ ?>
                 <option value="<?php echo $billing_emails ; ?>"><?php echo $billing_emails ; ?></option>
             <?php  }  ?>
         </select>
+    </div>
+   
+  </div>
 
-
-        <input type="submit" value="Submit" class="hellllo">
+  <button type="submit" class="btn btn-primary">Submit</button>
+   
+   
     </form>
+
+
 
 <?php
 
 ?>
-
-
-
-    <!-- Search Element -->
-    <div id='div_search'><input type='text' id='search' placeholder="Enter search text" /></div>
-
-    <!-- Table -->
-    <table id='empTable' border='1'>
-        <thead>
-        <tr>
-            <th>S.no</th>
-            <th>Employee Name</th>
-            <th>Email</th>
-            <th>Salary</th>
-            <th>Gender</th>
-            <th>City</th>
-        </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-
-
-
-
-
 
 
 <?php
