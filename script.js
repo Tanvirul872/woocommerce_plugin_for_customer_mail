@@ -57,9 +57,8 @@ jQuery(document).ready(function($){
             url: ajax_url,
             type: 'post',
             data: data,
-            dataType: 'json',
             success: function(response){
-                // Add new rows to table
+               
                 alert('success') ;
             }
         });

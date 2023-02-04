@@ -1,11 +1,11 @@
 <?php
 /*
-Plugin Name: Plugin AJAX
-Plugin URI: https://makitweb.com
-description: A custom plugin to demonstrate call and handle AJAX request
+Plugin Name: Send Mail from Woocommerce
+Plugin URI: https://anmtanvir.com/send-mail-woocommerce
+description: A custom plugin which we can use to send email template to customers of woocommrece
 Version: 1.0.0
-Author: Yogesh Singh
-Author URI: https://makitweb.com/about
+Author: Tanvirul Karim
+Author URI: https://anmtanvir.com/
 */
 
 // Add menu
@@ -18,17 +18,46 @@ add_action("admin_menu", "pluginajax_menu");
 function employeeList(){ 
 
 
-    include "employeeList.php";
+    include "template.php";
 
 }
 
 
+add_action('woocommerce_after_shop_loop_item_title','cm_woo_stock_quantity');
+function cm_woo_stock_quantity(){
+
+echo "Hi vaijan"  ; 
+
+global $product;
+
+// When product sizes are available
 
 
 
+}
 
 
-function mailtrap($phpmailer) {
+add_filter(‘woocommerce_product_add_to_cart_text’, function ($text) {
+    global $product;
+    if ($product->is_type(‘variable’)) {
+    $text = $product->is_purchasable() ? __(‘Add to cart’, ‘woocommerce’)
+    : __(‘Read more’, ‘woocommerce’);
+    }
+    return $text;
+    }, 10); 
+
+
+
+// function mailtrap($phpmailer) {
+//     $phpmailer->isSMTP();
+//     $phpmailer->Host = 'smtp.gmail.com';
+//     $phpmailer->SMTPAuth = true;
+//     $phpmailer->Port = 465;
+//     $phpmailer->Username = 'giftmail@tandkhospitality.com';
+//     $phpmailer->Password = 'Gift2023$$';
+//   }
+  
+  function mailtrap($phpmailer) {
     $phpmailer->isSMTP();
     $phpmailer->Host = 'smtp.mailtrap.io';
     $phpmailer->SMTPAuth = true;

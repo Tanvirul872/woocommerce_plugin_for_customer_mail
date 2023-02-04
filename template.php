@@ -42,7 +42,7 @@ foreach ( bbloomer_customer_list() as $customer_id ) {
         }
     }
 
-//        echo "<pre>";print_r($billing_email);
+       echo "<pre>";print_r($billing_email);
 
 
 }
